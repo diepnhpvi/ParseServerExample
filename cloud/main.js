@@ -1,11 +1,11 @@
 //require("./app.js");
-var loginmodule=require("./cloud");
-var activitymodule=require("./cloud");
-var analyticsmodule=require("./cloud");
-var userlevelmodule=require("./cloud");
-var challengemodule=require("./cloud");
-var testmodule=require("./cloud");
-var rankingmodule=require("./cloud");
+var loginmodule=require("./loginmodule.js");
+var activitymodule=require("./activitymodule.js");
+var analyticsmodule=require("./analyticsmodule.js");
+var userlevelmodule=require("./userlevelmodule.js");
+var challengemodule=require("./challengemodule.js");
+var testmodule=require("./testmodule.js");
+var rankingmodule=require("./rankingmodule.js");
 RESULT_CODE={
 	OK: 						1,
 	NEW_DATA_IN_OTHER_DEVICE: 	2,
