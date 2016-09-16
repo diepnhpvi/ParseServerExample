@@ -1,11 +1,11 @@
 //require("./app.js");
-var loginmodule=require("./loginmodule.js");
-var activitymodule=require("./activitymodule.js");
-var analyticsmodule=require("./analyticsmodule.js");
-var userlevelmodule=require("./userlevelmodule.js");
-var challengemodule=require("./challengemodule.js");
-var testmodule=require("./testmodule.js");
-var rankingmodule=require("./rankingmodule.js");
+var loginmodule = require("../cloud/loginmodule.js");
+var activitymodule = require("../cloud/activitymodule.js");
+var analyticsmodule = require("../cloud/analyticsmodule.js");
+var userlevelmodule = require("../cloud/userlevelmodule.js");
+var challengemodule = require("../cloud/challengefriend.js");
+var testmodule = require("../cloud/testmodule.js");
+var rankingmodule = require("../cloud/globalrankingmodule.js");
 RESULT_CODE={
 	OK: 						1,
 	NEW_DATA_IN_OTHER_DEVICE: 	2,
@@ -239,50 +239,50 @@ Parse.Cloud.define("RunAnalyticsWithTime", function (request, response) {
 	});
 });
 
-Parse.Cloud.job("JobAnalyticsYesterday", function (request, response) {
-	var dateNow=new Date();
-	var date=new Date(dateNow.getTime()-24*60*60*1000);// ngay hom qua
-	var year=date.getUTCFullYear();
-	var month=date.getUTCMonth()+1;
-	var day=date.getUTCDate();
+//Parse.Cloud.job("JobAnalyticsYesterday", function (request, response) {
+//	var dateNow=new Date();
+//	var date=new Date(dateNow.getTime()-24*60*60*1000);// ngay hom qua
+//	var year=date.getUTCFullYear();
+//	var month=date.getUTCMonth()+1;
+//	var day=date.getUTCDate();
 	
-	var dateString=year+"/"+month+"/"+day;
-	console.log("JobAnalyticsYesterday for day:"+dateString);
-    analyticsmodule.AnalyticsInADay(year,month,day,function(){
-		response.success("JobAnalyJobAnalyticsYesterdaytics finish for day:"+dateString+",now is:"+dateNow.getTime());
-	});
-});
+//	var dateString=year+"/"+month+"/"+day;
+//	console.log("JobAnalyticsYesterday for day:"+dateString);
+//    analyticsmodule.AnalyticsInADay(year,month,day,function(){
+//		response.success("JobAnalyJobAnalyticsYesterdaytics finish for day:"+dateString+",now is:"+dateNow.getTime());
+//	});
+//});
 
-Parse.Cloud.job("JobAnalyticsToday", function (request, response) {
-	var dateNow=new Date();
-	var date=new Date(dateNow.getTime());// ngay hom qua
-	var year=date.getUTCFullYear();
-	var month=date.getUTCMonth()+1;
-	var day=date.getUTCDate();
+//Parse.Cloud.job("JobAnalyticsToday", function (request, response) {
+//	var dateNow=new Date();
+//	var date=new Date(dateNow.getTime());// ngay hom qua
+//	var year=date.getUTCFullYear();
+//	var month=date.getUTCMonth()+1;
+//	var day=date.getUTCDate();
 	
-	var dateString=year+"/"+month+"/"+day;
-	console.log("JobAnalyticsToday for day:"+dateString);
-    analyticsmodule.AnalyticsInADay(year,month,day,function(){
-		response.success("JobAnalyticsToday finish for day:"+dateString+",now is:"+dateNow.getTime());
-	});
-});
+//	var dateString=year+"/"+month+"/"+day;
+//	console.log("JobAnalyticsToday for day:"+dateString);
+//    analyticsmodule.AnalyticsInADay(year,month,day,function(){
+//		response.success("JobAnalyticsToday finish for day:"+dateString+",now is:"+dateNow.getTime());
+//	});
+//});
 
-Parse.Cloud.job("JobAnalyticsWithTime", function (request, response) {
-	var dateNow=new Date();
-	var year=request.params.year;
-	var month=request.params.month;
-	var day=request.params.day;
-	if(year==null||month==null||day==null){
-		response.success("JobAnalyticsWithTime fail: invalid inputday");
-		return;
-	}
+//Parse.Cloud.job("JobAnalyticsWithTime", function (request, response) {
+//	var dateNow=new Date();
+//	var year=request.params.year;
+//	var month=request.params.month;
+//	var day=request.params.day;
+//	if(year==null||month==null||day==null){
+//		response.success("JobAnalyticsWithTime fail: invalid inputday");
+//		return;
+//	}
 
-	var dateString=year+"/"+month+"/"+day;
-	console.log("JobAnalyticsWithTime for day:"+dateString);
-    analyticsmodule.AnalyticsInADay(year,month,day,function(){
-		response.success("JobAnalyticsWithTime finish for day:"+dateString+",now is:"+dateNow.getTime());
-	});
-});
+//	var dateString=year+"/"+month+"/"+day;
+//	console.log("JobAnalyticsWithTime for day:"+dateString);
+//    analyticsmodule.AnalyticsInADay(year,month,day,function(){
+//		response.success("JobAnalyticsWithTime finish for day:"+dateString+",now is:"+dateNow.getTime());
+//	});
+//});
 Parse.Cloud.define("helloWorld2", function (request, response) {
     //call 'helloWorld' method from 'util.js' file
     var util = require("cloud/util.js");
@@ -292,9 +292,9 @@ Parse.Cloud.define("helloWorld2", function (request, response) {
     });
 });
 
-Parse.Cloud.job("testJOB", function (request, response) {
-    console.log("Test job call success! ");
-});
+//Parse.Cloud.job("testJOB", function (request, response) {
+//    console.log("Test job call success! ");
+//});
 
 
 // for info all song
@@ -342,17 +342,17 @@ Parse.Cloud.define("TestJobProcessInfoForSong", function (request, response) {
  	  });
 });
 
-Parse.Cloud.job("JobProcessInfoForSong", function (request, response) {
- 	  var result={
+//Parse.Cloud.job("JobProcessInfoForSong", function (request, response) {
+// 	  var result={
  	  	
- 	  }
- 	  console.log("JobProcessInfoForSong:1");
- 	  userlevelmodule.JobProcessInfoForSong(function(res){
- 	  	console.log("JobProcessInfoForSong: finish");
- 	  	result.data=res;
- 	  	response.success(res);
- 	  });
-});
+// 	  }
+// 	  console.log("JobProcessInfoForSong:1");
+// 	  userlevelmodule.JobProcessInfoForSong(function(res){
+// 	  	console.log("JobProcessInfoForSong: finish");
+// 	  	result.data=res;
+// 	  	response.success(res);
+// 	  });
+//});
 
 
 /// Challenge Friend feature
