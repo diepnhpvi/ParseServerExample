@@ -1,3 +1,4 @@
+
 // Example express application adding the parse-server module to expose Parse
 // compatible API routes.
 
@@ -7,16 +8,18 @@ var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
 
-if (!databaseUri) {
-  console.log('DATABASE_URI not specified, falling back to localhost.');
-}
+//if (!databaseUri) {
+//  console.log('DATABASE_URI not specified, falling back to localhost.');
+//}
 
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://diepnh:123456@ds023704.mlab.com:23704/heroku_plmrc75k',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + './cloud/main.js',
-  appId: process.env.APP_ID || 'mPyeByykpRn5LkfQAwrZCvTR38SwqsG7KLHVCykM',
-  masterKey: process.env.MASTER_KEY || 'mURND1KM48hBqPnF73ktYqlgXjU0ObcnfHnDVLyp', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost/parse',  // Don't forget to change to https if needed
+    //cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+  cloud: './cloud/main.js',
+  appId: 'mPyeByykpRn5LkfQAwrZCvTR38SwqsG7KLHVCykM',
+  fileKey: 'adab8963-6bfa-4acd-9f4e-e0ad186e2d5b',
+  masterKey:  'mURND1KM48hBqPnF73ktYqlgXjU0ObcnfHnDVLyp', //Add your master key here. Keep it secret!
+  serverURL:  'http://localhost:3000/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
@@ -45,7 +48,7 @@ app.get('/test', function(req, res) {
   res.sendFile(path.join(__dirname, '/public/test.html'));
 });
 
-var port = process.env.PORT || 80;
+var port = process.env.PORT || 3000;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
